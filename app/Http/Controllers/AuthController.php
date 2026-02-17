@@ -169,9 +169,11 @@ class AuthController extends Controller
      */
     public function show(string $id)
     {
+        $user = User::findOrFail($id);
         return response()->json([
             'success' => true,
             'message' => 'Users Show',
+            'data' => $user
         ], 200);
     }
 
@@ -180,6 +182,8 @@ class AuthController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $user = User::findOrFail($id);
+        $user->update($request->all());
         return response()->json([
             'success' => true,
             'message' => 'Users Update',
